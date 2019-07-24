@@ -34,7 +34,11 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
    
 var usLayer = omnivore.topojson('https://raw.githubusercontent.com/a-wylie/mapping/master/gjwgs84less2.json')
     .addTo(mymap);
-   
+
+function getColor(distance10) {
+    return distance10 > 20 ? '#800026' :
+           distance10 > 40  ? '#BD0026';
+            }
 </script>
 </body>
 
