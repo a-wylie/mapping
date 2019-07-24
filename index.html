@@ -37,7 +37,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 var customLayer = L.geoJson(null, {
     style: function(feature) {
         return {
-            color: '#f00'
+            color: '#a1dab4',
+            dashArray: '3',
         };
     }
 });
