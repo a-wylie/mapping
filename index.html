@@ -18,6 +18,8 @@
 
 <body>
 
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+   
 <div id="mapid"></div>
 
 <script>
@@ -29,6 +31,10 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     id: 'mapbox.light',
     accessToken: 'pk.eyJ1Ijoid3lsaWVhIiwiYSI6ImNqeWdidG95ZjAxa28zbW1zdW41Yjd0azIifQ.olNh_SrC3AwNNxPu4yDiFw'
 }).addTo(mymap);
+   
+var usLayer = omnivore.topojson('/mapbox.js/assets/data/world-110m.json')
+    .addTo(mymap);   
+   
 </script>
 </body>
 
