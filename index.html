@@ -25,6 +25,7 @@
 <script>
 var mymap = L.map('mapid').setView([45.421, -75.69], 8);
 
+//Adding Mapbox tiles   
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -32,9 +33,22 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1Ijoid3lsaWVhIiwiYSI6ImNqeWdidG95ZjAxa28zbW1zdW41Yjd0azIifQ.olNh_SrC3AwNNxPu4yDiFw'
 }).addTo(mymap);
    
-var more2Layer = omnivore.topojson('https://raw.githubusercontent.com/a-wylie/mapping/master/gjwgs84less2.json')
-    .addTo(mymap);
+//Styling TopoJSON
+var customLayer = L.geoJson(null, {
+    style: function(feature) {
+        return {
+            color: '#f00'
+        };
+    }
+});
 
+var runLayer = omnivore.topojson('https://raw.githubusercontent.com/a-wylie/mapping/master/gjwgs84less2.json', null, customLayer)
+    .on('ready', function() {
+        // http://leafletjs.com/reference.html#map-fitbounds
+        map.fitBounds(runLayer.getBounds());
+    })
+    .addTo(mymap);
+   
 </script>
 </body>
 
