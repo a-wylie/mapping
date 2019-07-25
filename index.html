@@ -34,30 +34,15 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(mymap);
    
 //Styling TopoJSON
-
-function getColor(d) {
-    return d > 1000 ? '#800026' :
-           d > 500  ? '#BD0026' ;
-}
-
-function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.distance11),
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    };
-}    
-    
-    
-var customLayer = L.geoJson;
+var customLayer = L.geoJson(null, {
+    style: function(feature) {
+        return { color: '#f00' };
+    }
+});
 
 //Adding TopoJSON
 var runLayer = omnivore.topojson('https://raw.githubusercontent.com/a-wylie/mapping/master/gjwgs84less2.json', null, customLayer)
     .on('ready', function() {
-        // http://leafletjs.com/reference.html#map-fitbounds
         map.fitBounds(runLayer.getBounds());
     })
     .addTo(mymap);
