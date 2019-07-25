@@ -35,7 +35,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
    
 //Styling TopoJSON
 
-function getColor(d) {
+ffunction getColor(d) {
     return d > 1000 ? '#800026' :
            d > 500  ? '#BD0026' :
            d > 200  ? '#E31A1C' :
@@ -44,21 +44,23 @@ function getColor(d) {
            d > 20   ? '#FEB24C' :
            d > 10   ? '#FED976' :
                       '#FFEDA0';
-}   
-
-var customLayer = L.geoJson(null, {
-    // http://leafletjs.com/reference.html#geojson-style
-    style: function(feature) {
-        return { getColor(feature.properties.distance12)};
-    }
-});   
+}
    
-//Adding TopoJSON
-var runLayer = omnivore.topojson('https://raw.githubusercontent.com/a-wylie/mapping/master/gjwgs84less2.json', null, customLayer)
-    .on('ready', function() {
-        map.fitBounds(runLayer.getBounds());
-    })
-    .addTo(mymap);
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.distance12),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.5
+    };
+}
+
+var testLayer = omnivore.topojson('https://raw.githubusercontent.com/a-wylie/mapping/master/gjwgs84less2.json')
+
+L.geoJson(testLayer, {style: style}).addTo(mymap);
+
    
 </script>
 </body>
