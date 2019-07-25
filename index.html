@@ -57,11 +57,9 @@ function style(feature) {
     };
 }
 
-var testLayer = omnivore.topojson('https://raw.githubusercontent.com/a-wylie/mapping/master/gjwgs84less2.json')
-
-L.geoJson(testLayer, {style: style}).addTo(mymap);
-
-   
+var customLayer = L.geoJson(null, {style: style});
+omnivore.topojson('https://raw.githubusercontent.com/a-wylie/mapping/master/gjwgs84less2.json', null, customLayer).addTo(map);   
+      
 </script>
 </body>
 
